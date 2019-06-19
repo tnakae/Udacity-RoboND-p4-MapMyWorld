@@ -9,6 +9,9 @@
   <material name="red">
     <color rgba="1.0 0.0 0.0 1.0"/>
   </material>
+  <material name="blue">
+    <color rgba="0.0 0.0 1.0 1.0"/>
+  </material>
 
   <link name="robot_footprint"></link>
 
@@ -227,11 +230,38 @@
   </joint>
 
   <joint name="camera_optical_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/>
+    <origin xyz="0.05 0 0" rpy="0 0 0"/>
     <parent link="camera"/>
     <child link="camera_link_optical"/>
   </joint>
 
   <link name="camera_link_optical">
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+        ixx="1e-6" ixy="0" ixz="0"
+        iyy="1e-6" iyz="0"
+        izz="1e-6"
+      />
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
   </link>
+  <gazebo reference="camera_link_optical">
+    <material>Gazebo/Blue</material>
+  </gazebo>
 </robot>
